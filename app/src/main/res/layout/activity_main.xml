@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/label_note"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Log.ly"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Catch.ly"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/dis_catch"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Switch
+        android:id="@+id/dis_log"
+        android:layout_width="138dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:onClick="logOff"
+        android:text="Disable"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Switch
+        android:id="@+id/dis_catch"
+        android:layout_width="133dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="catchOff"
+        android:text="Disable"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/enter_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="220dp"
+        android:onClick="intoLog"
+        android:text="temp_log"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/enter_catch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_marginEnd="60dp"
+        android:onClick="intoCatch"
+        android:text="temp_catch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
