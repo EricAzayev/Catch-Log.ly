@@ -10,7 +10,6 @@ public class SliderAdapter extends FragmentStateAdapter {
     public SliderAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
-
     @NonNull
     @Override
     public Fragment createFragment(int position) {
@@ -27,6 +26,6 @@ public class SliderAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 2;
     }
 }

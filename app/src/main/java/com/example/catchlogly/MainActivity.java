@@ -28,6 +28,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void intoCatch(View V) {
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+        intent.putExtra("label", "Catch.ly");
+        startActivity(intent);
+
+
+    }
+    public void intoLog(View V) {
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+        intent.putExtra("label", "Log.ly");
+        startActivity(intent);
+    }
+
     public void catchOff(View V){
         Switch catchChip = (Switch) findViewById(R.id.dis_catch);
         Button enterCatch = (Button) findViewById(R.id.enter_catch);
@@ -67,12 +80,7 @@ public class MainActivity extends AppCompatActivity {
 //        i.putExtra("title", "Log.ly");
 //        startActivity(i);
 //    }
-    public void intoCatch(View V) {
-        return;
-    }
-    public void intoLog(View V) {
-        return;
-    }
+
 
 
 //    public void intoCatch(View V) { // into catch activity
