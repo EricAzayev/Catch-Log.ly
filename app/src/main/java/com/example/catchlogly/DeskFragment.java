@@ -25,6 +25,10 @@ import java.util.Set;
  */
 public class DeskFragment extends Fragment {
     Button bind;
+    String testDate1 = "2024-10-03";
+
+    boolean inLogly = false;
+
     private ItemViewModel viewModel; //to access condition Catch or Log
 
     // TODO: Rename parameter arguments, choose names that match
@@ -75,7 +79,7 @@ public class DeskFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_desk, container, false);
 
-        //Set up the listener to receive data from BinderFragment
+        //Set up the listener to receive data from BinderFragment (Fragment to Fragment)
         getParentFragmentManager().setFragmentResultListener("dataFromBinder", this,
                 new FragmentResultListener() {
                     @Override
@@ -89,13 +93,19 @@ public class DeskFragment extends Fragment {
                             note.getEditText().setText(receivedNote); // Update the EditText with the received message
                         }
                     }
-                });
+        });
+
         bind = (Button) view.findViewById(R.id.Bind);
-        TextInputLayout editText = (TextInputLayout) view.findViewById(R.id.note);
+        TextInputLayout noteLine = (TextInputLayout) view.findViewById(R.id.note);
+        EditText titleLine = (EditText) view.findViewById(R.id.titleLine);
+        //method to store note
         bind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //bind.setEnabled(false);
+                String content = String.valueOf(noteLine.getEditText().getText());
+                String title = String.valueOf(titleLine.getText());
+                Note toStore = new Note(inLogly, content, testDate1, title);
+
                 
             }
         });
@@ -118,7 +128,11 @@ public class DeskFragment extends Fragment {
             //TextView date = (TextView) view.findViewById(R.id.date);
             //date.setText("Note");
 
-            if(label.equals("Log.ly"))editText.setHint("I am thankful for ");
+            if(label.equals("Log.ly")){
+
+                editText.setHint("I am thankful for ");
+                inLogly = true;
+            }
             else editText.setHint("I had this dream where ");
             if(!editText.getEditText().getText().equals(""))editText.setHint(label);
         });

@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 public class MainActivity2 extends AppCompatActivity {
     ViewPager2 viewPager;
+    boolean inLogly = false;
 
     private ItemViewModel viewModel; //to share between Activity2 and Desk Fragment
     @Override
@@ -26,6 +27,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         Intent intent = getIntent();
         String label = intent.getStringExtra("label");
+        if(label.equals("Log.ly"))inLogly = true;
 
         viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         viewModel.selectString(label); //one time pass to set hint

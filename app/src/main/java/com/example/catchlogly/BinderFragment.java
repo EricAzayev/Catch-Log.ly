@@ -71,12 +71,12 @@ public class BinderFragment extends Fragment {
 
         test = (Button) view.findViewById(R.id.test); //I can define buttons from other activities
         //TextInputLayout editText = (TextInputLayout) view.findViewById(R.id.note);
-        test.setOnClickListener(new View.OnClickListener() {
+        test.setOnClickListener(new View.OnClickListener() { //This button allows users to edit past notes
             @Override
             public void onClick(View v) {
                 Bundle fsSuccess = new Bundle(); //fs = fragment sent
 
-                String editNote = "Message sent successfully"; //will be set to note selected
+                String editNote = "Message sent successfully"; //temp string for note to edit.
 
                 fsSuccess.putString("editNote", editNote); //bundle has many keys
                 getParentFragmentManager().setFragmentResult("dataFromBinder", fsSuccess); //Will be accessed in order of BundleKey -> ItemKey returns Item
