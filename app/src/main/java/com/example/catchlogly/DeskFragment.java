@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -15,13 +16,15 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import java.time.LocalDate;
+import java.util.Set;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DeskFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class DeskFragment extends Fragment {
-
+    Button bind;
     private ItemViewModel viewModel; //to access condition Catch or Log
 
     // TODO: Rename parameter arguments, choose names that match
@@ -69,22 +72,51 @@ public class DeskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_desk, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_desk, container, false);
+
+        //Set up the listener to receive data from BinderFragment
+        getParentFragmentManager().setFragmentResultListener("dataFromBinder", this,
+                new FragmentResultListener() {
+                    @Override
+                    public void onFragmentResult(String requestKey, Bundle result) {
+                        // Retrieve the string from the Bundle
+                        String receivedNote = result.getString("editNote");
+
+                        // Find the TextInputLayout (or any view) and set the text
+                        TextInputLayout note = view.findViewById(R.id.note);
+                        if (note.getEditText() != null) {
+                            note.getEditText().setText(receivedNote); // Update the EditText with the received message
+                        }
+                    }
+                });
+        bind = (Button) view.findViewById(R.id.Bind);
+        TextInputLayout editText = (TextInputLayout) view.findViewById(R.id.note);
+        bind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //bind.setEnabled(false);
+                
+            }
+        });
+        return view;
+        //return inflater.inflate(R.layout.fragment_desk, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initialize ViewModel and observe LiveData
+        // Initialize viewModel to collect data from Main Activity (passed through Intents)
         viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
 
 
-        // Collect what string from MainActivity2
+        // Collect what string from MainActivity2 (passed through Intents)
         viewModel.getSelectedString().observe(getViewLifecycleOwner(), label -> {
             TextInputLayout editText = (TextInputLayout) view.findViewById(R.id.note);
-            TextView date = (TextView) view.findViewById(R.id.date);
-            date.setText("Note");
+            //TextView date = (TextView) view.findViewById(R.id.date);
+            //date.setText("Note");
 
             if(label.equals("Log.ly"))editText.setHint("I am thankful for ");
             else editText.setHint("I had this dream where ");

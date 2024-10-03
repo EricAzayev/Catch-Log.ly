@@ -1,5 +1,6 @@
 package com.example.catchlogly;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class BinderFragment extends Fragment {
+    Button test;
+    TextInputLayout note;
+
+    String toPass = "passed";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +67,26 @@ public class BinderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_binder, container, false);
+
+        test = (Button) view.findViewById(R.id.test); //I can define buttons from other activities
+        //TextInputLayout editText = (TextInputLayout) view.findViewById(R.id.note);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle fsSuccess = new Bundle(); //fs = fragment sent
+
+                String editNote = "Message sent successfully"; //will be set to note selected
+
+                fsSuccess.putString("editNote", editNote); //bundle has many keys
+                getParentFragmentManager().setFragmentResult("dataFromBinder", fsSuccess); //Will be accessed in order of BundleKey -> ItemKey returns Item
+
+
+            }
+        });
+        return view;
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_binder, container, false);
+        //return inflater.inflate(R.layout.fragment_binder, container, false);
     }
 }
