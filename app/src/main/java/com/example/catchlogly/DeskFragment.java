@@ -1,5 +1,7 @@
 package com.example.catchlogly;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,10 +28,16 @@ import java.util.Set;
  * create an instance of this fragment.
  */
 public class DeskFragment extends Fragment {
-    Button bind;
-    String testDate1 = "2024-10-03";
+    private Button bind;
+    private String testDate1 = "2024-10-03";
+    private String label;
+    private static final String KEY_NOTE_COUNT = "NoteCount";
 
     boolean inLogly = false;
+    //private String PREFS_NAME = "MyPrefs";
+    private static final String KEY_NOTE_LIST = "NoteList";
+    private List<Note> noteList = new ArrayList<>();
+
 
     private ItemViewModel viewModel; //to access condition Catch or Log
 
@@ -84,7 +94,7 @@ public class DeskFragment extends Fragment {
                 new FragmentResultListener() {
                     @Override
                     public void onFragmentResult(String requestKey, Bundle result) {
-                        // Retrieve the string from the Bundle
+                         //Retrieve the string from the Bundle
                         String receivedNote = result.getString("editNote");
 
                         // Find the TextInputLayout (or any view) and set the text
@@ -104,14 +114,22 @@ public class DeskFragment extends Fragment {
             public void onClick(View v) {
                 String content = String.valueOf(noteLine.getEditText().getText());
                 String title = String.valueOf(titleLine.getText());
-                Note toStore = new Note(inLogly, content, testDate1, title);
+                if (!title.isEmpty() && !content.isEmpty()) {
+                    Note noteToStore = new Note(content, testDate1, title);
+                    noteList.add(noteToStore);
 
-                
+                    //We only access file with name label, so all notes are Catch.ly or Log.ly
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(label, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    saveNotesToPreferences(); //saves all notes in noteList.
+                }
             }
         });
         return view;
         //return inflater.inflate(R.layout.fragment_desk, container, false);
     }
+
+
 
 
     @Override
@@ -127,6 +145,7 @@ public class DeskFragment extends Fragment {
             TextInputLayout editText = (TextInputLayout) view.findViewById(R.id.note);
             //TextView date = (TextView) view.findViewById(R.id.date);
             //date.setText("Note");
+            this.label = label;
 
             if(label.equals("Log.ly")){
 
@@ -140,6 +159,38 @@ public class DeskFragment extends Fragment {
 
 
     }
+    private void saveNotesToPreferences() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(label, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt(KEY_NOTE_COUNT, noteList.size());
+        for (int i = 0; i < noteList.size(); i ++) {
+            Note note = noteList.get(i);
+            editor.putString("note_title_" + i, note.getTitle());
+            editor.putString("note_content_" + i, note.getContent());
+            editor.putString("date_" + i, note.getDate());
+        }
+        editor.apply();
+    }
+
+    private void loadNotesFromPreferences() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(label, Context.MODE_PRIVATE);
+        int noteCount = sharedPreferences.getInt(KEY_NOTE_COUNT, 0);
+
+        for (int i = 0; i < noteCount; i++) {
+            String title = sharedPreferences.getString("note_title_" + i, "");
+            String content = sharedPreferences.getString("note_content_" + i, "");
+            String date = sharedPreferences.getString("date_" + i, "");
+
+            Note note = new Note(title, content, date); //T C D
+
+            noteList.add(note);
+        }
+    }
+
+
+
+
 
 //    public void bind(View V){
 //        //Button bind = (Button) V.findViewById(R.id.Bind);

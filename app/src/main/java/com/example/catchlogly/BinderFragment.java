@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -89,4 +90,38 @@ public class BinderFragment extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_binder, container, false);
     }
+
+    private void createNoteView(final Note note) {
+        View noteView = getLayoutInflater().inflate(R.layout.note_item,null);
+        //TextView titleTextView = noteView.findViewById(R.id.titleTextView);
+        //TextView contentTextView = noteView.findViewById(R.id.contentTextView);
+        //TextView dateView = noteView.findViewById(R.id.dateTextView);
+
+
+        //titleTextView.setText(note.getTitle());
+        //contentTextView.setText(note.getContent());
+        //dateView.setText(note.getDate());
+
+
+
+
+//        noteView.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                showDeleteDialog(note);
+//                return true;
+//            }
+//        });
+
+//        notesContainer.addView(noteView);
+    }
+
+
+
+
+
+
+
+
+    //dont delete below
 }

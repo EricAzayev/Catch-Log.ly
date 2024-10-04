@@ -3,7 +3,7 @@ package com.example.catchlogly;
 import java.util.Objects;
 
 public class Note {
-    private boolean inLogly;
+
     private String content;
     private String date;
     private String title;
@@ -13,21 +13,16 @@ public class Note {
     }
 
     // Constructor
-    public Note(boolean inLogly, String content, String date, String title) {
-        this.inLogly = inLogly;
+    public Note(String title, String content, String date) {
         this.content = content;
         this.date = date;
         this.title = title;
     }
 
     // Getters and Setters (optional)
-    public boolean inLogly() {
-        return inLogly;
-    }
 
-    public void setIn(boolean in) {
-        this.inLogly = in;
-    }
+
+
 
     public String getContent() {
         return content;
