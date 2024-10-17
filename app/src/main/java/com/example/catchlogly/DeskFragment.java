@@ -105,6 +105,20 @@ public class DeskFragment extends Fragment {
                     }
         });
 
+        getParentFragmentManager().setFragmentResultListener("editUpload", this,
+                new FragmentResultListener() {
+                    @Override
+                    public void onFragmentResult(String requestKey, Bundle result) {
+                        String recievedTitle = result.getString("editContent");
+                        String recievedContent = result.getString("editTitle");
+                        String recievedDate = result.getString("editDate");
+
+                        TextInputLayout note = view.findViewById(R.id.note);
+                        TextInputLayout title = view.findViewById(R.id.titleLine);
+                        //TextInputLayout date = view.findViewById(R.id.*****);
+                    }
+                });
+
         bind = (Button) view.findViewById(R.id.Bind);
         TextInputLayout noteLine = (TextInputLayout) view.findViewById(R.id.note);
         EditText titleLine = (EditText) view.findViewById(R.id.titleLine);

@@ -8,10 +8,14 @@
     tools:context=".BinderFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Frag2" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/test"
@@ -21,9 +25,69 @@
         android:text="test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.647"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.139" />
+
+    <TextView
+        android:id="@+id/notesTextView"
+        android:layout_width="342dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="32dp"
+        android:text="Notes:"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.238" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/notesTextView"
+        tools:layout_editor_absoluteX="10dp">
+
+        <ScrollView
+            android:id="@+id/notesScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/notesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </ScrollView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/testView"
+        android:layout_width="297dp"
+        android:layout_height="143dp"
+        android:text="testView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/test2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="54dp"
+        android:onClick="test2"
+        android:text="test2"
+        app:layout_constraintBottom_toTopOf="@+id/notesTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.304"
+        app:layout_constraintStart_toStartOf="@+id/testView"
+        app:layout_constraintTop_toBottomOf="@+id/test"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
